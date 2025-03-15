@@ -1,0 +1,274 @@
+
+
+
+{% extends 'base.html' %}
+{% block title %}
+    livestock dashboard
+{% endblock %}
+
+{% block content %}
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+
+    <style>
+
+        #explore-section { /* Or give the <a> tag an ID */
+            position: relative;
+            right: -20px; /* Adjust distance from right */
+            top: 30px;
+            font-size: 22px;
+            
+        }
+        
+        #explore-section button { /* Style the button itself */
+            background-color:rgb(209, 84, 46);; /* Example blue background */
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+
+        }
+        .contain {
+            position: relative;
+            width: 100px;
+            max-width: 400px; /* Adjust width as needed */
+            padding: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            text-align: center;
+        }
+        
+        /* Background Image with Dark Overlay */
+        .contain::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("https://www.woah.org/app/themes/woah/dist/images/newsletter-bg.jpg") center/cover no-repeat; /* Add your image URL */
+            filter: brightness(50%); /* Darkens the background */
+            z-index: -1;
+        }
+        
+        .container {
+            
+            position: absolute;
+            top: 100px;
+            left: 730px;
+            transform: translate(-50%, -50%);
+            background:rgb(212, 206, 206);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 6px 19px 23px 1px rgba(0, 0, 0, 0.15);
+            width: 340px;
+            border-bottom: 1px solid #f0f0f0;
+            
+        }
+        .circular-window {
+            width: 100px; /* Adjust size */
+            height: 100px; /* Make it a perfect circle */
+            background: linear-gradient(315deg, rgba(146, 191, 233, 0.43) 45%, rgba(224, 169, 191, 0.24) 62%);
+            color: black;
+            display: flex;
+            justify-content: center; /* Center text horizontally */
+            align-items: center; /* Center text vertically */
+            text-align: center;
+            border-radius: 50%; /* Makes it circular */
+            position: absolute;
+            top: -10px;
+            left: 450px;
+            text: 16px;
+            transform: translate(-50%, -50%);
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            cursor: pointer;
+            transform: scale(0.5);
+        }
+        .floating-window {
+            position: relative; /* Or fixed */
+            top: -10px;
+            left: 150px;
+        }
+        .floating-link {
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            display: block; /* Ensures it fills the container */
+        }
+    
+        .floating-link:hover {
+            text-decoration: underline; /* Adds underline on hover */
+        }
+
+        .one-third-background {
+            width: 100%;
+            height: 100%;
+            #background: linear-gradient(rgba(27, 42, 31, 0.8), rgba(27, 42, 31, 0.8)), url("https://www.woah.org/app/themes/woah/dist/images/newsletter-bg.jpg") center/cover no-repeat;
+            #background-color: linear-gradient(to bottom, #12b886 5%, #ffd43b 95%);
+            #background-image: radial-gradient(circle, rgba(104, 173, 237, 0.43) 18%, rgba(237, 110, 160, 0.24) 90%);
+            background-image: url("https://www.woah.org/app/themes/woah/dist/images/newsletter-bg.jpg"); /* Replace with your image path */
+            background-repeat: no-repeat;
+            overflow: hidden;
+            position: relative;
+            color: white;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            height: 80%;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px; 
+            
+        }
+        .one-third-background-container {
+            top: 10px;
+            left: 10px;
+            border-radius: 10px;
+            position: relative;
+            width: 450px;
+            height: 400px;
+            background: linear-gradient(rgba(37, 69, 77, 0.8), rgba(44, 58, 48, 0.8))center/cover no-repeat;
+        }
+
+        .text-style{
+            top: 10px;
+            overflow: hidden;
+            font-size: 50px;
+            font-weight: 700;
+            text-transform: none;
+            letter-spacing: 0px;
+            line-height: 53px;
+            white-space: pre-line;
+            word-break: break-word;
+            opacity: 1;
+            visibility: visible;
+            margin-inline-start: 10px;
+        }
+
+        select {
+            background: transparent;  /* Makes the background transparent */
+            border: none;  /* Removes the border */
+            outline: none; /* Removes the focus outline */
+            color:rgba(16, 112, 145, 0.7);
+            font-size: 16px; /* Adjust font size */
+            padding: 5px; /* Adds some spacing */
+            
+        }
+        
+        /* Optional: Add a down arrow icon */
+        select::after {
+            content: "▼";
+            font-size: 14px;
+            color: blue;
+            padding-left: 10px;
+        }
+
+
+    </style>
+
+    
+        
+    <div class="one-third-background">
+
+        <div class="one-third-background-container">
+            <p class="text-style">Explore</p>
+            <p class="text-style" style="color: #B6421E;">all features</p>
+            <p class="text-style">here</p>
+
+            <a href="#explore" id="explore-section">
+                <button>Explore</button>
+            </a>
+        </div>
+
+        <div class="circular-window">
+
+            <h2 id="explore">1</h2>
+        </div>
+
+            
+        <div class="container">
+            <form method="POST">
+                <!-- Date of Birth -->
+                    
+                <label for="dob" style="font-family: Georgia, serif; color: #333; margin-right: 23px">Date of Birth:</label>    
+                <input type="date" id="dob" name="dob" required style="font-family: Pacifico, cursive; border: none; background: transparent; 
+                    outline: none; color: transparent;"
+                    onfocus="this.style.color='black'" onblur="if(!this.value) this.style.color='transparent'">
+
+                <!-- Calculate Age On -->
+                <label for="calc_date" style="font-family: Georgia, serif; color: #333; margin-right: 0px">Calculate age on:</label>
+                <input type="date" id="calc_date" name="calc_date" required style="font-family: Pacifico, cursive; border: none; background: transparent;
+                    outline: none; color: transparent;"
+                    onfocus="this.style.color='black'" onblur="if(!this.value) this.style.color='transparent'">
+                <br>
+
+                <!-- Select Format -->
+                <label for="format_choice" style="font-family: Georgia, serif; color: #333; margin-right: 14px">Show result in:</label>
+                <select class="select" id="format_choice" name="format_choice">
+                    <option value="days">Days</option>
+                    <option value="weeks">Weeks</option>
+                    <option value="months">Months</option>
+                    <option value="years">Years</option>
+                    <option value="ymd" selected>years/months/days</option>
+                </select>
+                    
+                <br>
+                <button type="submit">Calculate Age</button>
+            </form>
+
+            {% if result %}
+                <p style="margin-top: 10px; font-weight: bold;">= {{ result }}</p>
+            {% endif %}
+
+            <script src="{{ url_for('static', filename='script.js') }}"></script>
+        
+                
+        </div>
+        
+
+
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+            
+        <h2>Results for "{{ query }}"</h2>
+
+
+        {% if results %}
+            <ul>
+                {% for result in results %}
+                    <li>{{ result["name"] }} - {{ result["species"] }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No results found.</p>
+        {% endif %}
+
+        </div>
+
+
+
+        
+    
+        
+        <br></br>
+        <br></br>
+        <div class="floating-link">
+            <a href="{{ url_for('home_page') }}">Go Back to Home</a>
+        </div>
+
+        <div class="contain"></div>
+    </div>
+    
+
+{% endblock %}

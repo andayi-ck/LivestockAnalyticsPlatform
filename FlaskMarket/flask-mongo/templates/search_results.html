@@ -1,0 +1,35 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Search Results</h1>
+
+        {% if contact %}
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Contact Details</h5>
+                    <p class="card-text"><strong>Mobile:</strong> {{ contact.mobile }}</p>
+                    <p class="card-text"><strong>Email:</strong> {{ contact.email }}</p>
+                    <p class="card-text"><strong>Address:</strong> {{ contact.address }}</p>
+                    <p class="card-text"><strong>Registration Number:</strong> {{ contact.reg_no }}</p>
+                    </div>
+            </div>
+        {% else %}
+            <p>No contact found.</p>  {% endif %}
+
+        <a href="{{ url_for('search_contacts') }}" class="btn btn-primary">Back to Search</a>
+    </div>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
